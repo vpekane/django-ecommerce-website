@@ -33,9 +33,9 @@ class Command(BaseCommand):
                 if tag_created:
                     c["tags_created"] += 1
             with open(os.path.join(
-                    options["image_basedir"],
+                    options["image_baserdir"],
                     row["image_filename"],
-                ), "rw",) as file:
+                ), "rb",) as file:
                 image = models.ProductImage(
                     product = product,
                     image = ImageFile(file, name = row["image_filename"])
