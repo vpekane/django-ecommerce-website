@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.test import TestCase, override_settings
 from main import models
+from os.path import exists
 
 class TestImport(TestCase):
     @override_settings(MEDIA_ROOT = tempfile.gettempdir())
@@ -22,4 +23,9 @@ class TestImport(TestCase):
         self.assertEqual(out.getvalue(), expected_out)
         self.assertEqual(models.Product.object.count(), 3)
         self.assertEqual(models.ProductTag.object.count(), 6)
-        self.assertEqual(models.ProductImage.object.count(), 3)
+        self.assertEqual(models.ProductImage.objects.count(), 3)
+
+    def test_csv_file_exists(self):
+        file_exists = exists("main/fixtures/product-sample.csv")
+
+        self.assertEqual(file_exists, True)
