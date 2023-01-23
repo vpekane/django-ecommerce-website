@@ -92,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': str(BASE_DIR / 'db.sqlite3'),
-        'NAME': 'postregs',
+        'NAME': 'booktime',
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
@@ -119,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "main.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
