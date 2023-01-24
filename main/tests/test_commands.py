@@ -16,14 +16,14 @@ class TestImport(TestCase):
         call_command('import_data', *args, stdout = out)
 
         expected_out = ("Importing products\n"
-                        "Products processed = 3 (created = 3)\n"
-                        "Tags processed = 6 (created = 6)\n"
-                        "Images processed = 3\n")
+                        "Products processed = 4 (created = 4)\n"
+                        "Tags processed = 9 (created = 9)\n"
+                        "Images processed = 4\n")
 
         self.assertEqual(out.getvalue(), expected_out)
-        self.assertEqual(models.Product.object.count(), 3)
-        self.assertEqual(models.ProductTag.object.count(), 6)
-        self.assertEqual(models.ProductImage.objects.count(), 3)
+        self.assertEqual(models.Product.object.count(), 4)
+        self.assertEqual(models.ProductTag.object.count(), 9)
+        self.assertEqual(models.ProductImage.objects.count(), 4)
 
     def test_csv_file_exists(self):
         file_exists = exists("main/fixtures/product-sample.csv")
