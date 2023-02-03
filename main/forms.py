@@ -7,6 +7,7 @@ from django.contrib.auth.forms import (
 )
 from . import models
 from django.contrib.auth import authenticate
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +71,7 @@ class AuthenticationForm(forms.Form):
             )
 
             if self.user is None:
+                messages.warning(self.request, "Invalid email/password combination")
                 raise forms.ValidationError(
                     "Invalid email/password combination"
                 )
