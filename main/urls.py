@@ -23,4 +23,5 @@ urlpatterns = [
     path("address/create/", views.AddressCreateView.as_view(template_name="address_form.html"), name="address_create",),
     path("address/<int:pk>/", views.AddressUpdateView.as_view(template_name="address_update.html"), name="address_update",),
     path("address/<int:pk>/delete/", views.AddressDeleteView.as_view(template_name="address_confirm_delete.html"), name="address_delete",),
+    path("add_to_basket/", views.add_to_basket, name="add_to_basket"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
