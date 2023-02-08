@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 
 def basket_middleware(get_response):
     def middleware(request) -> HttpResponse:
-        if 'basket.id' in request.session:
+        if 'basket_id' in request.session:
             basket_id = request.session['basket_id']
             basket = models.Basket.objects.get(id=basket_id)
             request.basket = basket
