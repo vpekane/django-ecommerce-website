@@ -191,3 +191,36 @@ class TestPage(TestCase):
         self.assertEqual(
             models.BasketLine.objects.all().count(), 2
         )
+
+    def test_add_to_basket_login_merge_works(self):
+        user1 = models.User.object.create_user(
+            "user1@a.com", "Compl3xP@ssw0rd",
+        )
+        cb = models.Product.object.create(
+            name="The cathedral and the bazaar",
+            price=Decimal("10.00"),
+            slug="cathedral-bazaar"
+        )
+        w = models.Product.object.create(
+            name="Microsoft Windows guide",
+            price=Decimal("12.00"),
+            slug="microsoft-windows-guide",
+        )
+        basket = models.Basket.objects.create(user=user1)
+        models.BasketLine.objects.create(
+            basket=basket, product=cb, quantity=2
+        )
+        response = self.client.get(
+            reverse("add_to_basket"), {"product_id": w.id}
+        )
+        response = self.client.post(
+            reverse("login"), {"email": "user1@a.com", "password": "Compl3xP@ssw0rd"},
+        )
+        self.assertTrue(
+            auth.get_user(self.client).is_authenticated
+        )
+        self.assertTrue(
+            models.Basket.objects.filter(user=user1).exists()
+        )
+        basket = models.Basket.objects.get(user=user1)
+        self.assertEqual(basket.count(), 3)
