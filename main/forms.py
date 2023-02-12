@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
     UserCreationForm as DjangoUserCreationForm,
     UsernameField
 )
-from . import models
+from . import models, widgets
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.forms import inlineformset_factory
@@ -89,4 +89,5 @@ BasketLineFormSet = inlineformset_factory(
     models.BasketLine,
     fields=("quantity",),
     extra=0,
+    widgets={"quantity": widgets.PlusMinusNumberInput()},
 )

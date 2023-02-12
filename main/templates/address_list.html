@@ -11,8 +11,8 @@
             {{ address.get_country_display }}</br>
         </p>
         <p>
-            <button class="btn btn-secondary"><a href="{% url 'address_delete' address.id %}">Delete address</a></button>
-            <button class="btn btn-secondary"><a href="{% url 'address_update' address.id %}">Update address</a></button>
+            <button class="btn btn-default"><a href="{% url 'address_delete' address.id %}">Delete address</a></button>
+            <button class="btn btn-default"><a href="{% url 'address_update' address.id %}">Update address</a></button>
         </p>
         {% if not forloop.last %}
             <hr>
